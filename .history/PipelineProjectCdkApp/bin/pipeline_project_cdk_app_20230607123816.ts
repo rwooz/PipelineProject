@@ -11,4 +11,4 @@ new PipelineProjectCdkAppStack(app, 'PipelineProjectCdkAppStack', {
   }
 });
 
-app.synth();
+app.synth(); // Might not be needed
