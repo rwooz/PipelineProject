@@ -47,14 +47,15 @@ export class PipelineProjectCdkAppStack extends cdk.Stack {
     const pipelineDockerImage: cdk.DockerImageAssetLocation = {
       imageUri: pipelineAsset.imageUri,
       repositoryName: pipelineEcr.repositoryName,
-      imageTag: 'latest'
+      imageTag: 'SamplePipeline'
     };
 
     // Create Pipeline
     const pipelinePipeline = new CodePipeline(this, 'SamplePipelinePipeline', {
-      pipelineName: 'SamplePipeline',
       synth: new ShellStep('Synth', {
-        input: CodePipelineSource.ecr(pipelineEcr, {imageTag: 'latest'}),
+        input: CodePipelineSource.connection('my-org/my-app', 'main', {
+          connectionArn: 'arn:aws:codestar-connections:us-east-1:222222222222:connection/7d2469ff-514a-4e4f-9003-5ca4a43cdc41', // Created using the AWS console
+        }),
         commands: [
           'npm ci',
           'npm run build',

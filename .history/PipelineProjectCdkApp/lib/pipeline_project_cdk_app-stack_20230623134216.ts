@@ -54,7 +54,7 @@ export class PipelineProjectCdkAppStack extends cdk.Stack {
     const pipelinePipeline = new CodePipeline(this, 'SamplePipelinePipeline', {
       pipelineName: 'SamplePipeline',
       synth: new ShellStep('Synth', {
-        input: CodePipelineSource.ecr(pipelineEcr, {imageTag: 'latest'}),
+        input: CodePipelineSource.ecr(),
         commands: [
           'npm ci',
           'npm run build',
